@@ -12,6 +12,15 @@ import {
   publicMint
 } from '../utils/interact'
 
+
+import dynamic from 'next/dynamic'
+const SwapWidget = dynamic(
+  () => import('@pangolindex/components').then((module) => module.SwapWidget),
+  {
+    ssr: false
+  }
+)
+
 export default function Mint() {
   const [{ wallet, connecting }, connect, disconnect] = useConnectWallet()
   const [{ chains, connectedChain, settingChain }, setChain] = useSetChain()
@@ -289,6 +298,11 @@ export default function Mint() {
             </div>
           </div>
         </div>
+                
+      <div className="w-[400px]">
+        <SwapWidget />
+      </div>
+      
       </div>
     </div>
   )
